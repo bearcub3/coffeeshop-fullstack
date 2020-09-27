@@ -54,11 +54,16 @@ This is a code that uses some kind of cryptography to generate a random number t
 
 4. Biometric Authentication
 
-[Oath2](https://oauth.net/2/)
-[Autho0 Identity Providers](https://auth0.com/docs/identityproviders)
-[Google Identity Platform](https://developers.google.com/identity/)
-[Magic Links](https://hackernoon.com/magic-links-d680d410f8f7)
-[iOS Biometrics](https://developer.apple.com/documentation/localauthentication)
+[Oath2](https://oauth.net/2/)    
+
+[Autho0 Identity Providers](https://auth0.com/docs/identityproviders)    
+
+[Google Identity Platform](https://developers.google.com/identity/)    
+
+[Magic Links](https://hackernoon.com/magic-links-d680d410f8f7)    
+
+[iOS Biometrics](https://developer.apple.com/documentation/localauthentication)    
+
 [Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_US)
 
 
@@ -66,8 +71,28 @@ This is a code that uses some kind of cryptography to generate a random number t
 
 Why Delegate the Responsibility?
 
-**Technical debt**    
-something we cannot change quickly and effectively, it may lead to vulnerability and mistakes and the two areas that need tremendous amounts of work defects.
+* Monolithic    
+
+Monolithic architecture is great as you're starting off with smaller systems where you might have a few endpoints are a few responsibilities, but as your system starts to grow and you have more and more complexity, it might become overwhemling to maintain and manage. Often in a monolithic service with many responsbilities, there might be interdependencies that make it difficult to make changes to your code. 
+This is called **Technical debt**. Something we cannot change quickly and effectively, it may lead to vulnerability and mistakes and the two areas that need tremendous amounts of work defects.
+
+* Microservices    
+
+Modern architecture is often referred to as microservices.
+This is where we take those individual responsibilities and split them up into smaller servers or smaller pieces of architecture deployed across different areas of a stack. All the servercies are self-contained and minimal interaction between them is needed to accomplish our goals.
+![microservices](https://github.com/bearcub3/coffeeshop-fullstack/blob/master/Microservices.png)
+
+Commont Auth Services:    
+[Auth0)(https://auth0.com/)    
+
+[AWS Cognito](https://aws.amazon.com/ko/cognito/)    
+
+[Firebase Auth](https://firebase.google.com/docs/auth)    
+
+[Okta](https://www.okta.com/)    
+
+
+#### Implementing Auth0
 
 [Auth0 Authorize Link (Implementing Auth0)](https://auth0.com/docs/api/authentication#authorize-application)
 
@@ -78,8 +103,8 @@ It may help to fill in the url in the textbox below before copying it into your 
 https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=token&client_id={{YOUR_CLIENT_ID}}&redirect_uri={{YOUR_CALLBACK_URI}}
 ```
 
+**Integrating Auth0 With Your Frontend**    
 
-Integrating Auth0 With Your Frontend
 To integrate Auth0 with your frontend you simply need to redirect your user to your Auth0 hosted login page and include a url to redirect them to upon completion. This can be done using a simple html anchor link:
 
 <a href="{{AUTH0_AUTHORIZE_URL}}">Login</a>
