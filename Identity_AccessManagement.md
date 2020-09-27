@@ -96,7 +96,8 @@ Commont Auth Services:
 
 [Auth0 Authorize Link (Implementing Auth0)](https://auth0.com/docs/api/authentication#authorize-application)
 
-The complete documentation for the authorization code flow can be found in Auth0's Documentation.
+Using the Auth0 Authorization Code Flow with Hosted Login Pages
+The complete documentation for the authorization code flow can be found in [Auth0's Documentation](https://auth0.com/docs/api/authentication#authorize-application).
 It may help to fill in the url in the textbox below before copying it into your browser:
 
 ```
@@ -107,38 +108,51 @@ https://{{YOUR_DOMAIN}}/authorize?audience={{API_IDENTIFIER}}&response_type=toke
 
 To integrate Auth0 with your frontend you simply need to redirect your user to your Auth0 hosted login page and include a url to redirect them to upon completion. This can be done using a simple html anchor link:
 
-<a href="{{AUTH0_AUTHORIZE_URL}}">Login</a>
+`<a href="{{AUTH0_AUTHORIZE_URL}}">Login</a>`    
 
-For a more seamless user experience, you can (and should) set up a custom domain on Auth0 by following the instructions in their docs.
-This is also a good idea to minimize the risk of Phishing Attacks by ensuring that your users do not accidentally enter their credentials into a login form that just looks like yours.
 
+For a more seamless user experience, you can (and should) set up a custom domain on Auth0 by following the instructions in [their docs](https://auth0.com/docs/custom-domains).
+This is also a good idea **to minimize the risk of Phishing Attacks** by ensuring that your users do not accidentally enter their credentials into a login form that just looks like yours.
+
+**Alternative Authentication Methods in Auth0**    
+
+- look at the connections menu on the left side
+- or multifactor Auth (E-mail, SMS, One-time Password etc)
 
 ### JSON Web Tokens (JWTs)
 
+![JWT](https://github.com/bearcub3/coffeeshop-fullstack/blob/master/JWT.png)
+
 - the benefits of JWTs
 
-  1. stateless
+  1. stateless, it works wonders in microservices. with one token, we can run multiple services. 
   2. difficult to fake
   3. popular and easily implemented across platforms
   4. flexible
 
-Parts of a JSON Web Token
+#### JWT - Datastructure
 
-`header.payload.signature`
+**Parts of a JSON Web Token**
 
-* JWT - Datastructure
+```
+header.payload.signature
 
 Payload is responsible for containing information specific to the currently authenticated user.
+```
 
-* JWT - Validation
+#### JWT - Validation
 
-https://jwt.io/introduction/
+![jwt secret](https://github.com/bearcub3/coffeeshop-fullstack/blob/master/JWT%20secret.png)
 
-https://en.wikipedia.org/wiki/HMAC
-HMAC keyed-hash message authentication code
+Validating JWT Authenticity    
 
-https://en.wikipedia.org/wiki/Base64
+If the signature strings match, we can trust that the data within the JWT is authentic.
 
+[JWT](https://jwt.io/introduction/)    
+
+[HMAC](https://en.wikipedia.org/wiki/HMAC) keyed-hash message authentication code
+
+[Base64 Encoding](https://en.wikipedia.org/wiki/Base64)    
 
 
 ### Storing Tokens in Web Browsers
