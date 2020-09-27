@@ -44,6 +44,8 @@ In contrast, some issues are within our control as developers:
 
 2. Multi-Factor Authentication
 
+![MultiFactorAuthentication](https://github.com/bearcub3/coffeeshop-fullstack/blob/master/multi-factor-authentication.png)
+
 decaying temporal algorithm
 
 3. Passwordless
