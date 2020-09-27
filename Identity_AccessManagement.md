@@ -38,7 +38,7 @@ In contrast, some issues are within our control as developers:
 * Developers can cut corners
 
 
-- Alternative Authentication Methods
+#### Alternative Authentication Methods
 
 1. Single Sign-On (SSO)
 
