@@ -46,23 +46,30 @@ In contrast, some issues are within our control as developers:
 
 ![MultiFactorAuthentication](https://github.com/bearcub3/coffeeshop-fullstack/blob/master/multi-factor-authentication.png)
 
-decaying temporal algorithm
+An alternative to generating the code on our server and having it sent to our user would be to generate the code on the device itself. This is often done with something called a **decaying temporal algorithm**. 
+This is a code that uses some kind of cryptography to generate a random number that corresponds to a specific time. Only the device and the service knows that code at any given instance in time. ex) RSA SecureID, Titan security key
 
 3. Passwordless
 
+
 4. Biometric Authentication
 
+[Oath2](https://oauth.net/2/)
+[Autho0 Identity Providers](https://auth0.com/docs/identityproviders)
+[Google Identity Platform](https://developers.google.com/identity/)
+[Magic Links](https://hackernoon.com/magic-links-d680d410f8f7)
+[iOS Biometrics](https://developer.apple.com/documentation/localauthentication)
+[Google Authenticator](https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2&hl=en_US)
 
-- Third-Party Auth Systems
+
+#### Third-Party Auth Systems
 
 Why Delegate the Responsibility?
 
-technical debt => something we cannot change quickly and effectively, it may lead to vulnerability and mistakes and the two areas that need tremendous amounts of work defects.
+**Technical debt**    
+something we cannot change quickly and effectively, it may lead to vulnerability and mistakes and the two areas that need tremendous amounts of work defects.
 
-
-- Auth0 Authorize Link (Implementing Auth0)    
-
-`https://auth0.com/docs/api/authentication#authorize-application`
+[Auth0 Authorize Link (Implementing Auth0)](https://auth0.com/docs/api/authentication#authorize-application)
 
 The complete documentation for the authorization code flow can be found in Auth0's Documentation.
 It may help to fill in the url in the textbox below before copying it into your browser:
