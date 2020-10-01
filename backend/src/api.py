@@ -7,6 +7,7 @@ from flask_cors import CORS
 from .database.models import db_drop_and_create_all, setup_db, Drink
 from .auth.auth import AuthError, requires_auth
 
+
 app = Flask(__name__)
 setup_db(app)
 CORS(app)
@@ -31,6 +32,7 @@ db_drop_and_create_all()
 
 
 @app.route('/drinks')
+@requires_auth('get:drinks')
 def get_drinks():
     drinks = Drink.query.order_by(Drink.id).all()
     data = [drink.short() for drink in drinks]
@@ -184,23 +186,13 @@ def remove_drink(payload, id):
         }), 200
 
 
-# Error Handling
+    # Error Handling
 '''
 Example error handling for unprocessable entity
 '''
 
-
-@app.errorhandler(422)
-def unprocessable(error):
-    return jsonify({
-        "success": False,
-        "error": 422,
-        "message": "unprocessable"
-    }), 422
-
-
 '''
-@TODO implement error handlers using the @app.errorhandler(error) decorator
+@DONE implement error handlers using the @app.errorhandler(error) decorator
     each error handler should return (with approprate messages):
              jsonify({
                     "success": False, 
@@ -211,9 +203,27 @@ def unprocessable(error):
 '''
 
 '''
-@TODO implement error handler for 404
+@DONE implement error handler for 404
     error handler should conform to general task above 
 '''
+
+
+@app.errorhandler(400)
+def handle_bad_request(error):
+    return jsonify({
+        'success': False,
+        'error': 400,
+        'message': 'Bad request'
+    }), 400
+
+
+@app.errorhandler(401)
+def not_authorized(error):
+    return jsonify({
+        'success': False,
+        'error': 401,
+        'message': 'unauthorized'
+    }), 401
 
 
 @app.errorhandler(404)
@@ -225,7 +235,42 @@ def not_found(error):
     }), 404
 
 
+@app.errorhandler(405)
+def not_allowed(error):
+    return jsonify({
+        'success': False,
+        'error': 405,
+        'message': 'method not allowed'
+    }), 405
+
+
+@app.errorhandler(422)
+def unprocessable(error):
+    return jsonify({
+        "success": False,
+        "error": 422,
+        "message": "unprocessable"
+    }), 422
+
+
+@app.errorhandler(500)
+def server_error(error):
+    return jsonify({
+        'success': False,
+        'error': 500,
+        'message': 'internal server error'
+    }), 500
+
+
 '''
-@TODO implement error handler for AuthError
+@DONE implement error handler for AuthError
     error handler should conform to general task above 
 '''
+
+
+@app.errorhandler(AuthError)
+def handle_auth_error(error):
+    return jsonify({
+        'success': False,
+        'error': error.status_code,
+    }), error.status_code
